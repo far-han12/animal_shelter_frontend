@@ -1,0 +1,44 @@
+
+> frontend@0.1.0 build
+> next build
+
+ ⚠ `eslint` configuration in next.config.mjs is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'eslint'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 16.0.10 (Turbopack)
+
+   Creating an optimized production build ...
+Error: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [2m[at onInvalidCandidate (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:21:1314)][0m
+    [2m[at Te (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:16:36652)][0m
+    [2m[at E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:21:355][0m
+    [2m[at Rr (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:3:1718)][0m
+    [2m[at _ (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:3:1377)][0m
+    [2m[at $e (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:21:172)][0m
+    [2m[at un (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:38:294)][0m
+    [2m[at process.processTicksAndRejections (node:internal/process/task_queues:95:5)][0m
+    [2m[at async cn (E:\a1\frontend\node_modules\tailwindcss\dist\lib.js:38:631)][0m
+    [2m[at async Xr (E:\a1\frontend\node_modules\@tailwindcss\node\dist\index.js:10:3417)][0m
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: E:\a1\frontend\app\globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    at Input.error (node_modules/postcss/lib/input.js:135:16) [E:\a1\frontend\.next\build\chunks\node_modules_fe693df6._.js:4651:22]
+    at Root.error (node_modules/postcss/lib/node.js:146:32) [E:\a1\frontend\.next\build\chunks\node_modules_fe693df6._.js:928:38]
+    [at Object.Once (E:\a1\frontend\node_modules\@tailwindcss\postcss\dist\index.js:10:6911)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]
+    at async LazyResult.runAsync (node_modules/postcss/lib/lazy-result.js:293:11) [E:\a1\frontend\.next\build\chunks\node_modules_fe693df6._.js:6206:21]
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [E:\a1\frontend\.next\build\chunks\[root-of-the-server]__51225daf._.js:146:36]
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [E:\a1\frontend\.next\build\chunks\[root-of-the-server]__974941ed._.js:443:31]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.js [Server Component]
+
+
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [E:\a1\frontend\.next\build\chunks\[root-of-the-server]__51225daf._.js:146:36])
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [E:\a1\frontend\.next\build\chunks\[root-of-the-server]__974941ed._.js:443:31])
