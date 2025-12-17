@@ -39,12 +39,19 @@ export default function AdminDonations() {
                                         <div className="text-xs text-muted-foreground">{d.donorEmail}</div>
                                     </td>
                                     <td className="p-4 font-bold">{d.amount} BDT</td>
-                                    <td className="p-4">{d.purpose}</td>
+                                    <td className="p-4">
+                                        {d.purpose}
+                                        {d.petId && (
+                                            <div className="text-xs text-muted-foreground">
+                                                Pet: {d.petId.name}
+                                            </div>
+                                        )}
+                                    </td>
                                     <td className="p-4">
                                         <span className={`px-2 py-1 rounded-full text-xs font-semibold ${d.ssl?.status === 'VALID' ? 'bg-green-100 text-green-800' :
-                                                d.ssl?.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                                                    d.ssl?.status === 'FAILED' ? 'bg-red-100 text-red-800' :
-                                                        'bg-gray-100 text-gray-800'
+                                            d.ssl?.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
+                                                d.ssl?.status === 'FAILED' ? 'bg-red-100 text-red-800' :
+                                                    'bg-gray-100 text-gray-800'
                                             }`}>
                                             {d.ssl?.status}
                                         </span>

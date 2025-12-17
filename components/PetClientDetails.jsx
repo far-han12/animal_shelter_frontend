@@ -112,7 +112,12 @@ export default function PetClientDetails({ pet }) {
                         </Button>
                     </>
                 )}
-                <Button size="lg" variant="secondary" onClick={handleSponsor}>
+                <Button
+                    size="lg"
+                    variant="secondary"
+                    onClick={handleSponsor}
+                    disabled={['PENDING_REVIEW', 'ADOPTED'].includes(pet.status)}
+                >
                     Sponsor Me (500 BDT)
                 </Button>
             </div>
