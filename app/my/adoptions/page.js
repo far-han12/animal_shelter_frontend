@@ -91,6 +91,16 @@ export default function MyAdoptions() {
                                             {app.status}
                                         </div>
                                     </div>
+                                    {app.status === 'APPROVED' && (
+                                        <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-md">
+                                            <h4 className="font-semibold text-green-900 mb-2">Contact Details for Adoption</h4>
+                                            <div className="text-sm text-green-800 space-y-1">
+                                                <p><strong>Name:</strong> {app.petId?.submittedBy?.name || 'Animal Shelter'}</p>
+                                                <p><strong>Email:</strong> {app.petId?.submittedBy?.email || 'support@animalshelter.com'}</p>
+                                                <p><strong>Phone:</strong> {app.petId?.submittedBy?.phone || '+880 1700 000000'}</p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </Card>
                             ))}
                         </div>

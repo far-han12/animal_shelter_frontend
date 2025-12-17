@@ -10,10 +10,13 @@ import { Card, CardContent } from '@/components/ui/Card';
 // 
 
 
+import ActionModal from '@/components/ui/ActionModal';
+
 export default function AdminAdoptions() {
     const { token } = useAuth();
     const [apps, setApps] = useState([]);
     const [statusFilter, setStatusFilter] = useState('');
+    const [modalConfig, setModalConfig] = useState({ isOpen: false, type: '', id: '' });
 
     useEffect(() => {
         if (token) loadAdoptions();
@@ -24,17 +27,21 @@ export default function AdminAdoptions() {
         api.get(`/admin/adoptions${query}`, token).then(res => setApps(res.data));
     };
 
-    const updateStatus = async (id, status) => {
-        const note = prompt('Admin Note (Optional):');
+    const handleAction = (id, type) => {
+        setModalConfig({ isOpen: true, type, id });
+    };
+
+    const confirmAction = async (note) => {
+        const { id, type } = modalConfig;
+        const status = type === 'approve' ? 'APPROVED' : 'REJECTED';
         try {
             await api.patch(`/admin/adoptions/${id}`, { status, adminNote: note }, token);
             setApps(apps.map(a => a._id === id ? { ...a, status, adminNote: note } : a));
-            toast.success('Application status updated');
+            toast.success(`Application ${status.toLowerCase()}`);
         } catch (err) {
             toast.error(err.message);
         }
     };
-
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -71,6 +78,7 @@ export default function AdminAdoptions() {
                                     <td className="p-4">
                                         <div className="font-medium">{app.userId?.name}</div>
                                         <div className="text-xs text-muted-foreground">{app.userId?.email}</div>
+                                        <div className="text-xs text-muted-foreground">{app.userId?.phone}</div>
                                     </td>
                                     <td className="p-4">{app.petId?.name}</td>
                                     <td className="p-4 max-w-xs truncate text-xs">
@@ -87,8 +95,8 @@ export default function AdminAdoptions() {
                                     <td className="p-4 flex gap-2">
                                         {app.status === 'PENDING' && (
                                             <>
-                                                <Button size="sm" onClick={() => updateStatus(app._id, 'APPROVED')} className="bg-green-600">Approve</Button>
-                                                <Button size="sm" variant="destructive" onClick={() => updateStatus(app._id, 'REJECTED')}>Reject</Button>
+                                                <Button size="sm" onClick={() => handleAction(app._id, 'approve')} className="bg-green-600">Approve</Button>
+                                                <Button size="sm" variant="destructive" onClick={() => handleAction(app._id, 'reject')}>Reject</Button>
                                             </>
                                         )}
                                     </td>
@@ -98,6 +106,18 @@ export default function AdminAdoptions() {
                     </table>
                 </CardContent>
             </Card>
+
+            <ActionModal
+                isOpen={modalConfig.isOpen}
+                onClose={() => setModalConfig({ ...modalConfig, isOpen: false })}
+                onConfirm={confirmAction}
+                title={modalConfig.type === 'approve' ? 'Approve Application' : 'Reject Application'}
+                description={`Are you sure you want to ${modalConfig.type} this application?`}
+                confirmText={modalConfig.type === 'approve' ? 'Approve' : 'Reject'}
+                destructive={modalConfig.type === 'reject'}
+                withInput={true}
+                inputLabel="Add an Admin Note (Optional)"
+            />
         </div>
     );
 }
