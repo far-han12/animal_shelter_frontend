@@ -89,7 +89,8 @@ export default function PetClientDetails({ pet }) {
                 petId: pet._id,
                 donorName: user?.name,
                 donorEmail: user?.email,
-                donorPhone: user?.phone
+                donorPhone: user?.phone,
+                userId: user?._id
             });
             if (res.success && res.url) {
                 window.location.href = res.url;

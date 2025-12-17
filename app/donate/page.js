@@ -23,6 +23,7 @@ export default function DonatePage() {
                 return;
             }
 
+            console.log('Donating as User:', user);
             const res = await api.post('/donations/init', {
                 amount: finalAmount,
                 purpose: 'GENERAL',
