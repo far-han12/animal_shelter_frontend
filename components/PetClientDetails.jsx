@@ -175,7 +175,7 @@ export default function PetClientDetails({ pet }) {
                                 <Label>Additional Notes</Label>
                                 <Textarea name="notes" />
                             </div>
-                            <div className="grid gap-2">
+                            <div className="grid gap-2 hidden">
                                 <Label>Token (Testing)</Label>
                                 <Input disabled value={'Token will be auto-attached from cookies'} />
                             </div>
